@@ -1,25 +1,25 @@
 """
 =============================================================================
- CONFIGURACIÓN DEL SCREENER - Stock Opportunity Finder v1
+ CONFIGURACION DEL SCREENER - Stock Opportunity Finder v1
 =============================================================================
- Estrategia: Detectar empresas sólidas (tipo buy&hold con dividendos)
- que están temporalmente infravaloradas, con confirmación técnica.
- 
- Inspirado en la estrategia de medio plazo de Gregorio Hernández Jiménez.
+ Estrategia: detectar empresas solidas (tipo buy&hold con dividendos)
+ que estan temporalmente infravaloradas, con confirmacion tecnica.
+
+ Inspirado en la estrategia de medio plazo de Gregorio Hernandez Jimenez.
 =============================================================================
 """
 
 # ---------------------------------------------------------------------------
 # 1. UNIVERSO DE MERCADOS
 # ---------------------------------------------------------------------------
-# Cada mercado es un dict con nombre y lista de tickers (formato yfinance).
-# Para añadir/quitar empresas, simplemente edita las listas.
-# Sufijos yfinance: .MC (Madrid), .PA (París), .DE (Frankfurt), .AS (Amsterdam),
-#   .MI (Milán), .BR (Bruselas), .LS (Lisboa), .HE (Helsinki),
-#   .AX (Australia), .T (Tokio), .HK (Hong Kong), .KS (Corea)
+# Cada mercado es un dict con nombre y lista de tickers en formato yfinance.
+# Sufijos habituales:
+#   .MC (Madrid), .PA (Paris), .DE (Frankfurt), .AS (Amsterdam),
+#   .MI (Milan), .BR (Bruselas), .LS (Lisboa), .HE (Helsinki),
+#   .AX (Australia), .T (Tokio), .HK (Hong Kong), .KS (Corea), .WA (Polonia)
 
 MARKETS = {
-    # ── EUROSTOXX / Principales europeas ────────────────────────────────
+    # EUROSTOXX / Principales europeas
     "EUROSTOXX": [
         # Alemania (DAX)
         "ALV.DE", "BAS.DE", "BAYN.DE", "BMW.DE", "CON.DE",
@@ -38,40 +38,37 @@ MARKETS = {
         # Italia
         "ENEL.MI", "ENI.MI", "ISP.MI", "G.MI", "UCG.MI", "SRG.MI",
         "TIT.MI", "TEN.MI", "PRY.MI", "RACE.MI",
-        # Bélgica
+        # Belgica
         "ABI.BR", "UCB.BR", "SOLB.BR", "KBC.BR",
         # Portugal
         "EDP.LS", "GALP.LS", "SON.LS",
         # Finlandia
         "FORTUM.HE", "NESTE.HE", "NOKIA.HE",
-        # Suiza (extra-UE pero relevante)
+        # Suiza
         "NESN.SW", "NOVN.SW", "ROG.SW", "UBSG.SW", "ZURN.SW",
-        # UK (post-Brexit pero relevante)
+        # UK
         "SHEL.L", "BP.L", "GSK.L", "AZN.L", "ULVR.L", "HSBA.L",
         "LLOY.L", "BARC.L", "RIO.L", "BHP.L", "VOD.L", "NG.L",
         "SSE.L", "BA.L", "DGE.L", "BATS.L", "IMB.L", "LSEG.L",
     ],
 
-    # ── S&P 500 principales (Dividend Aristocrats + Value) ──────────────
+    # S&P 500 principales (Dividend Aristocrats + Value)
     "SP500": [
-        # Dividend Aristocrats / Kings
         "JNJ", "PG", "KO", "PEP", "MMM", "ABT", "ABBV", "T", "VZ",
         "XOM", "CVX", "CL", "EMR", "GPC", "SWK", "ITW", "ADP", "BDX",
         "ED", "LOW", "TGT", "MCD", "AFL", "CB", "SHW",
-        # Grandes value / dividendo
         "JPM", "BAC", "WFC", "C", "GS", "MS", "BRK-B", "UNH",
         "HD", "WMT", "COST", "CSCO", "INTC", "IBM", "CAT", "DE",
         "UPS", "FDX", "RTX", "LMT", "GD", "BA",
         "PFE", "MRK", "BMY", "AMGN", "GILD",
         "DUK", "SO", "NEE", "AEP", "D", "SRE",
-        "O", "SPG", "AMT", "PSA",  # REITs
+        "O", "SPG", "AMT", "PSA",
         "PM", "MO", "KMB", "HRL", "SJM", "GIS", "CPB",
         "F", "GM", "IP", "WY",
-        # Tech value (cuando caen)
         "AAPL", "MSFT", "GOOG", "META", "AVGO", "TXN", "QCOM",
     ],
 
-    # ── ASX (Australia) ─────────────────────────────────────────────────
+    # ASX (Australia)
     "ASX": [
         "BHP.AX", "CBA.AX", "CSL.AX", "NAB.AX", "WBC.AX", "ANZ.AX",
         "MQG.AX", "WES.AX", "WOW.AX", "TLS.AX", "RIO.AX", "FMG.AX",
@@ -80,9 +77,32 @@ MARKETS = {
         "MGR.AX", "VCX.AX", "TWE.AX", "BEN.AX", "BOQ.AX",
     ],
 
-    # ── Asia ─────────────────────────────────────────────────────────────
+    # Italy mid/small caps (.MI) validadas con yfinance.info
+    "ITALY_MID": [
+        # Banca / seguros / finanzas
+        "BMED.MI", "BGN.MI", "CE.MI", "FBK.MI", "PST.MI", "UNI.MI",
+        "MB.MI", "AZM.MI",
+        # Industrial / infraestructura
+        "IP.MI", "REY.MI", "CRL.MI", "AMP.MI", "BZU.MI", "DAN.MI",
+        "MAIRE.MI", "WBD.MI", "INW.MI",
+        # Consumo / utilities
+        "REC.MI", "DIA.MI", "HER.MI", "IRE.MI", "A2A.MI", "BPE.MI",
+        "BC.MI", "MONC.MI", "IG.MI",
+    ],
+
+    # Poland / principales empresas (.WA) validadas con yfinance.info
+    "POLAND": [
+        # Banca / finanzas
+        "PKO.WA", "PEO.WA", "SPL.WA", "PZU.WA",
+        # Energia / materias primas
+        "PKN.WA", "KGH.WA", "PGE.WA", "TPE.WA", "JSW.WA",
+        # Consumo / tecnologia / otros
+        "CDR.WA", "ALE.WA", "DNP.WA", "CPS.WA", "OPL.WA", "EAT.WA",
+    ],
+
+    # Asia
     "ASIA": [
-        # Japón (Nikkei - principales dividend payers)
+        # Japon
         "7203.T", "8306.T", "8316.T", "8411.T", "9432.T", "9433.T",
         "9434.T", "4502.T", "4503.T", "4568.T", "6758.T", "6861.T",
         "7267.T", "7751.T", "8031.T", "8058.T", "8766.T", "9020.T",
@@ -99,11 +119,13 @@ MARKETS = {
     ],
 }
 
-# Selecciona qué mercados escanear (comenta/descomenta según necesites)
+# Mercados activos por defecto
 ACTIVE_MARKETS = [
     "EUROSTOXX",
     "SP500",
     "ASX",
+    "ITALY_MID",
+    "POLAND",
     "ASIA",
 ]
 
@@ -116,122 +138,74 @@ QUICK_MARKETS = [
 # ---------------------------------------------------------------------------
 # 2. FILTROS FUNDAMENTALES (Capa 1: Calidad / Solidez)
 # ---------------------------------------------------------------------------
-# IMPORTANTE: Esta estrategia busca empresas que ERAN sólidas y están en un
-# bache temporal. Por tanto distinguimos entre:
-#   - HISTORIAL: ¿era una buena empresa antes del problema? (lo que importa)
-#   - SITUACIÓN ACTUAL: puede estar deteriorada temporalmente (aceptable)
-#
-# Una empresa que ha recortado o suspendido dividendo NO se descarta
-# automáticamente si tiene historial de haberlo pagado durante años.
-# De hecho, un recorte de dividendo reciente puede ser PARTE de la caída
-# que genera la oportunidad.
-
 FUNDAMENTAL = {
-    # ── HISTORIAL DE DIVIDENDOS (lo que importa) ──
-    # ¿Pagaba dividendo de forma consistente ANTES del problema?
-    "min_historical_div_years": 5,      # Años con dividendo en los últimos 10 (no consecutivos)
-    # Ejemplo: si pagó 7 de 10 años, cumple. Permite huecos recientes.
+    # Historial de dividendos
+    "min_historical_div_years": 5,
+    "min_peak_dividend_yield": 2.0,
 
-    "min_peak_dividend_yield": 2.0,     # % yield máximo alcanzado en últimos 5 años
-    # Demuestra que la empresa SÍ era generosa con el accionista.
+    # Dividendo actual
+    "current_div_bonus_threshold": 1.0,
+    "max_payout_ratio": 90.0,
 
-    # ── DIVIDENDO ACTUAL (flexible) ──
-    # El dividendo actual puede estar reducido o ser cero.
-    # En vez de exigir un mínimo, damos BONUS si aún lo paga:
-    "current_div_bonus_threshold": 1.0, # Si yield actual ≥ este %, bonus de puntuación
-    # Si es 0% o bajo, no penaliza (la empresa puede haberlo cortado temporalmente)
+    # Deuda
+    "max_debt_to_equity": 2.0,
+    "max_net_debt_ebitda": 4.0,
 
-    "max_payout_ratio": 90.0,           # % máximo de payout (por encima, riesgo de corte futuro)
-    # Solo aplica si hay payout; si no paga dividendo actual, se ignora.
+    # Rentabilidad
+    "min_roe": 8.0,
+    "roe_soft_floor": 3.0,
+    "min_positive_earnings_years": 3,
 
-    # ── DEUDA ──
-    "max_debt_to_equity": 2.0,          # Ratio deuda/equity máximo
-    "max_net_debt_ebitda": 4.0,         # Deuda neta / EBITDA normalizado máximo
-    # Nota: bancos y utilities se ajustan en SECTOR_OVERRIDES
-
-    # ── RENTABILIDAD ──
-    "min_roe": 8.0,                     # % ROE mínimo (puede relajarse si el problema es temporal)
-    "roe_soft_floor": 3.0,             # % ROE mínimo absoluto — por debajo, descarte
-    # Entre soft_floor y min_roe: puntuación reducida pero no eliminatoria
-
-    "min_positive_earnings_years": 3,   # De los últimos 4 años, al menos X con beneficio
-
-    # ── TAMAÑO MÍNIMO ──
-    "min_market_cap_millions": 500,     # Capitalización mínima en millones USD/EUR
-    "min_avg_daily_volume": 100000,     # Liquidez media diaria mínima
+    # Tamano minimo
+    "min_market_cap_millions": 500,
+    "min_avg_daily_volume": 100000,
 }
 
 
 # ---------------------------------------------------------------------------
-# 3. FILTROS DE VALORACIÓN (Capa 2: Infravaloración temporal)
+# 3. FILTROS DE VALORACION
 # ---------------------------------------------------------------------------
 VALUATION = {
-    # PER
-    "max_per": 18.0,                    # PER máximo absoluto
-    "per_discount_vs_historical": 25.0, # % de descuento del PER actual vs media 5 años
-    # Ejemplo: si media histórica es 16 y actual es 12, descuento = 25%
-
-    # Rentabilidad por dividendo
+    "max_per": 18.0,
+    "per_discount_vs_historical": 25.0,
     "div_yield_premium_vs_historical": 20.0,
-    # % de prima del yield actual vs media 5 años
-    # Si media es 3% y actual es 3.6%, prima = 20%
-
-    # Precio
-    "min_drop_from_52w_high": 15.0,     # % mínimo de caída desde máximo 52 semanas
-    "max_drop_from_52w_high": 60.0,     # % máximo (más de esto puede ser problema real)
-
-    # Price to Book (opcional, 0 para desactivar)
-    "max_price_to_book": 3.0,           # P/B máximo
-    "max_ev_ebitda": 12.0,              # EV/EBITDA máximo
+    "min_drop_from_52w_high": 15.0,
+    "max_drop_from_52w_high": 60.0,
+    "max_price_to_book": 3.0,
+    "max_ev_ebitda": 12.0,
 }
 
 
 # ---------------------------------------------------------------------------
-# 4. FILTROS TÉCNICOS (Capa 3: Timing / Señal de entrada)
+# 4. FILTROS TECNICOS
 # ---------------------------------------------------------------------------
 TECHNICAL = {
-    # RSI
     "rsi_period": 14,
-    "rsi_oversold": 35,                 # RSI por debajo = sobreventa
-    "rsi_recovery_zone": 45,            # RSI entre oversold y este valor = recuperándose
-    # Buscamos RSI < recovery_zone (idealmente saliendo de oversold)
-    "rsi_divergence_min_window": 20,    # Distancia mínima entre mínimos para divergencia
-    "rsi_divergence_max_window": 60,    # Distancia máxima entre mínimos para divergencia
-    "rsi_divergence_bonus_points": 10,  # Bonus técnico si hay divergencia alcista válida
-
-    # MACD
+    "rsi_oversold": 35,
+    "rsi_recovery_zone": 45,
+    "rsi_divergence_min_window": 20,
+    "rsi_divergence_max_window": 60,
+    "rsi_divergence_bonus_points": 10,
     "macd_fast": 12,
     "macd_slow": 26,
     "macd_signal": 9,
-    # Señal: MACD cruzando al alza la línea de señal, o histograma girando
-
-    # Medias móviles
     "sma_short": 50,
     "sma_long": 200,
-    # Señal: precio acercándose a SMA200 desde abajo, o SMA50 girando al alza
-
-    # Volumen
-    "volume_increase_threshold": 1.3,   # Volumen actual vs media 20 sesiones
-    # Volumen creciente en rebote confirma interés comprador
-
-    # Soportes
-    "support_proximity_pct": 5.0,       # % de cercanía al soporte para considerarlo "en zona"
-    "support_lookback_days": 120,       # Días hacia atrás para calcular soportes
-
-    # Periodo de datos históricos para análisis técnico
-    "history_period": "2y",             # Datos de los últimos 2 años
+    "volume_increase_threshold": 1.3,
+    "support_proximity_pct": 5.0,
+    "support_lookback_days": 120,
+    "history_period": "2y",
 }
 
 
 # ---------------------------------------------------------------------------
-# 5. SCORING (Ponderación de cada capa)
+# 5. SCORING
 # ---------------------------------------------------------------------------
 SCORING = {
-    "weight_fundamental": 0.35,         # 35% del score final
-    "weight_valuation": 0.40,           # 40% - lo más importante para esta estrategia
-    "weight_technical": 0.25,           # 25% - confirmación de timing
-
-    "min_total_score": 55,              # Score mínimo (0-100) para aparecer en resultados
+    "weight_fundamental": 0.35,
+    "weight_valuation": 0.40,
+    "weight_technical": 0.25,
+    "min_total_score": 55,
 }
 
 
@@ -248,27 +222,25 @@ VERSIONING = {
 # ---------------------------------------------------------------------------
 # 6. AJUSTES POR SECTOR
 # ---------------------------------------------------------------------------
-# Algunos sectores tienen métricas inherentemente distintas.
-# Estos overrides se aplican cuando se detecta el sector.
 SECTOR_OVERRIDES = {
     "Financial Services": {
-        "max_debt_to_equity": 8.0,      # Bancos tienen D/E muy alto por naturaleza
-        "max_net_debt_ebitda": None,    # Ignorar para bancos/aseguradoras
-        "max_price_to_book": 1.5,       # P/B más exigente para bancos
+        "max_debt_to_equity": 8.0,
+        "max_net_debt_ebitda": None,
+        "max_price_to_book": 1.5,
         "min_roe": 6.0,
     },
     "Utilities": {
         "max_debt_to_equity": 3.5,
         "max_net_debt_ebitda": 5.0,
-        "max_per": 22.0,                # Utilities suelen cotizar con PER más alto
+        "max_per": 22.0,
     },
     "Real Estate": {
         "max_debt_to_equity": 4.0,
-        "max_per": 25.0,                # REITs usan FFO, PER es menos relevante
+        "max_per": 25.0,
         "min_dividend_yield": 3.0,
     },
     "Energy": {
-        "max_per": 14.0,                # Sector cíclico, PER bajo es normal
+        "max_per": 14.0,
     },
 }
 
@@ -278,19 +250,19 @@ SECTOR_OVERRIDES = {
 # ---------------------------------------------------------------------------
 OUTPUT = {
     "results_dir": "results",
-    "export_xlsx": True,                # Exportar a Excel
-    "export_csv": True,                 # Exportar a CSV
-    "top_n_results": 50,                # Mostrar top N resultados
-    "include_failed_tickers": False,    # Incluir log de tickers que fallaron
+    "export_xlsx": True,
+    "export_csv": True,
+    "top_n_results": 50,
+    "include_failed_tickers": False,
 }
 
 
 # ---------------------------------------------------------------------------
-# 8. EJECUCIÓN
+# 8. EJECUCION
 # ---------------------------------------------------------------------------
 EXECUTION = {
-    "max_workers": 4,                   # Hilos paralelos para descarga de datos
-    "request_delay": 0.2,               # Segundos entre requests (evitar rate limit)
-    "cache_expiry_hours": 12,           # Horas de validez del caché local
-    "retry_attempts": 2,                # Reintentos por ticker fallido
+    "max_workers": 4,
+    "request_delay": 0.2,
+    "cache_expiry_hours": 12,
+    "retry_attempts": 2,
 }
