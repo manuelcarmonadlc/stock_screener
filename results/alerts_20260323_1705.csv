@@ -1,0 +1,14 @@
+Ticker,Alert_Type,Severity,Title,Message,Triggered_At,Is_Read
+CSL.AX,new_opportunity,media,Nueva oportunidad detectada en CSL.AX,CSL.AX aparece por primera vez con score 83.5 y clasificación entrada_directa.,2026-03-23T17:04:54.714110+01:00,False
+WES.AX,new_opportunity,media,Nueva oportunidad detectada en WES.AX,WES.AX aparece por primera vez con score 60.5 y clasificación descarte.,2026-03-23T17:04:59.724782+01:00,False
+FMG.AX,new_opportunity,media,Nueva oportunidad detectada en FMG.AX,FMG.AX aparece por primera vez con score 64.5 y clasificación seguimiento.,2026-03-23T17:05:07.280290+01:00,False
+AMC.AX,new_opportunity,media,Nueva oportunidad detectada en AMC.AX,AMC.AX aparece por primera vez con score 62.6 y clasificación descarte.,2026-03-23T17:05:14.360472+01:00,False
+QBE.AX,new_opportunity,media,Nueva oportunidad detectada en QBE.AX,QBE.AX aparece por primera vez con score 65.2 y clasificación seguimiento.,2026-03-23T17:05:18.011210+01:00,False
+SUN.AX,new_opportunity,media,Nueva oportunidad detectada en SUN.AX,SUN.AX aparece por primera vez con score 66.3 y clasificación seguimiento.,2026-03-23T17:05:19.137382+01:00,False
+IAG.AX,new_opportunity,media,Nueva oportunidad detectada en IAG.AX,IAG.AX aparece por primera vez con score 72.7 y clasificación seguimiento.,2026-03-23T17:05:19.369046+01:00,False
+SCG.AX,new_opportunity,media,Nueva oportunidad detectada en SCG.AX,SCG.AX aparece por primera vez con score 81.4 y clasificación entrada_directa.,2026-03-23T17:05:22.820484+01:00,False
+GPT.AX,new_opportunity,media,Nueva oportunidad detectada en GPT.AX,GPT.AX aparece por primera vez con score 65.7 y clasificación seguimiento.,2026-03-23T17:05:23.224213+01:00,False
+MGR.AX,new_opportunity,media,Nueva oportunidad detectada en MGR.AX,MGR.AX aparece por primera vez con score 72.2 y clasificación entrada_escalada.,2026-03-23T17:05:23.770032+01:00,False
+VCX.AX,new_opportunity,media,Nueva oportunidad detectada en VCX.AX,VCX.AX aparece por primera vez con score 69.8 y clasificación seguimiento.,2026-03-23T17:05:26.170992+01:00,False
+TWE.AX,new_opportunity,media,Nueva oportunidad detectada en TWE.AX,TWE.AX aparece por primera vez con score 74.6 y clasificación entrada_directa.,2026-03-23T17:05:26.861406+01:00,False
+BEN.AX,new_opportunity,media,Nueva oportunidad detectada en BEN.AX,BEN.AX aparece por primera vez con score 68.5 y clasificación seguimiento.,2026-03-23T17:05:27.942582+01:00,False

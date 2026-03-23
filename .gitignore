@@ -5,4 +5,5 @@ cache/
 .env
 *.pyc
 .DS_Store
+.streamlit/secrets.toml
 results/*.xlsx

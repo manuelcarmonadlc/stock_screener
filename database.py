@@ -446,6 +446,46 @@ def get_previous_evaluation(ticker: str) -> dict | None:
     return _row_to_dict(row)
 
 
+def database_exists() -> bool:
+    """Indica si la base SQLite local existe ya en disco."""
+    return DB_PATH.exists()
+
+
+def get_latest_evaluations(
+    exclude_discarded: bool = False,
+    limit: int | None = None,
+) -> list[dict]:
+    """Devuelve la ultima evaluacion disponible por ticker."""
+    filters = []
+    params: list[Any] = []
+    if exclude_discarded:
+        filters.append("final_classification IS NOT NULL AND final_classification != 'descarte'")
+
+    query = f"""
+        WITH ranked AS (
+            SELECT
+                e.*,
+                ROW_NUMBER() OVER (
+                    PARTITION BY ticker
+                    ORDER BY evaluation_date DESC, id DESC
+                ) AS row_number
+            FROM evaluations e
+        )
+        SELECT *
+        FROM ranked
+        WHERE row_number = 1
+        {f"AND {' AND '.join(filters)}" if filters else ""}
+        ORDER BY total_score DESC, ticker ASC
+    """
+    if limit is not None:
+        query += " LIMIT ?"
+        params.append(limit)
+
+    with _get_connection() as connection:
+        rows = connection.execute(query, tuple(params)).fetchall()
+    return [_row_to_dict(row) for row in rows]
+
+
 def get_watchlist_state(ticker: str) -> dict | None:
     """Devuelve el estado actual de watchlist para un ticker."""
     with _get_connection() as connection:

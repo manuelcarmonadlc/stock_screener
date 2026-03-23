@@ -8,13 +8,18 @@ Screener de acciones que detecta empresas sólidas (tipo buy&hold con dividendos
 
 ```
 stock_screener/
-├── AGENTS.md              # This file (instructions for coding agents)
-├── config.py              # Configuration: thresholds, tickers, weights, sector adjustments
-├── screener.py            # Main engine: data fetch, 3-layer analysis, scoring, export
-├── requirements.txt       # Python dependencies
-├── README.md              # User documentation
-├── cache/                 # Local yfinance data cache (auto-generated)
-└── results/               # Output: Excel + CSV with opportunities (auto-generated)
+├── AGENTS.md                  # This file (instructions for coding agents)
+├── config.py                  # Configuration: thresholds, tickers, weights, sector adjustments
+├── screener.py                # Main engine: 5-layer pipeline, scoring, export, alerts
+├── database.py                # SQLite persistence: evaluations, watchlist, alerts
+├── dashboard.py               # Streamlit dashboard
+├── requirements.txt           # Python dependencies
+├── requirements_streamlit.txt # Streamlit Cloud dependencies
+├── documentation/             # Project documentation and handoff material
+├── .streamlit/                # Streamlit config and secrets example
+├── .github/workflows/         # Automated scans in GitHub Actions
+├── cache/                     # Local yfinance data cache (auto-generated)
+└── results/                   # Output: CSV + fichas Markdown (auto-generated)
 ```
 
 ## Dev environment
@@ -43,6 +48,10 @@ python screener.py --markets IBEX SP500
 
 # Clear cache and rescan
 python screener.py --clear-cache
+
+# Watchlist and alerts
+python screener.py --watchlist
+python screener.py --alerts
 ```
 
 After any code change, always run `python screener.py --quick` to verify it works.
@@ -55,9 +64,9 @@ After any code change, always run `python screener.py --quick` to verify it work
 - **rich** — Console output with tables and progress bars
 - **openpyxl** — Excel export
 
-## Business logic: 3-layer filtering
+## Business logic: 5-layer filtering
 
-### Layer 1 — Fundamental (35% of score)
+### Layer 1 — Quantitative
 Evaluates HISTORICAL QUALITY, not current state. Key philosophy: a company
 that has cut or suspended its dividend is NOT discarded — this may be PART
 of the opportunity. What matters is whether it WAS solid before the problem:
@@ -67,18 +76,25 @@ of the opportunity. What matters is whether it WAS solid before the problem:
 - Debt/Equity controlled (critical to survive the downturn), adjusted by sector
 - ROE with soft floor (depressed ROE is acceptable if not negative)
 - Minimum market cap (avoid penny stocks)
+- Valuation metrics integrated here: PE, P/B, EV/EBITDA, drawdowns, liquidity
 
-### Layer 2 — Valuation (40% of score)
-Detects temporary undervaluation: low PE ratio vs threshold, 15-60% drop from
-52-week high, reasonable P/B ratio, price below SMA200.
+### Layer 2 — Causal classification
+Currently heuristic/stub. Reserved for causal diagnosis of the problem.
 
-### Layer 3 — Technical (25% of score)
-Timing signals: RSI oversold/recovery, MACD bullish crossover or convergence,
-SMA50 turning up, increasing volume, proximity to support levels.
+### Layer 3 — Recovery
+Signals based on yfinance data only: margin stabilization, EPS stabilization,
+debt reduction, dividend maintained, analyst upside, insider context if available.
 
-### Scoring
-Weighted composite score 0-100 with labels:
-🟢 ≥75 (strong), 🟡 ≥60 (moderate), 🔵 ≥55 (watch).
+### Layer 4 — Technical validation
+Timing signals: RSI, MACD, supports, SMA50/SMA200, weekly MACD, stochastic,
+weekly MA40, base pattern detection, trendline break proxy.
+
+### Layer 5 — Operational plan
+Final categorical classification, entry/exit zones, invalidation conditions,
+horizon estimate, Markdown fichas.
+
+### Hard rules
+Hard rules override the numeric score before final classification.
 
 ## Markets covered
 
@@ -114,3 +130,13 @@ Weighted composite score 0-100 with labels:
 - **Configurable**: Every threshold in config.py, nothing hardcoded.
 - **Defensive**: Try/catch on data fetch; failing tickers don't interrupt the scan.
 - **Transparent**: Output shows exactly which flags were triggered and why.
+
+## Deployment
+
+- **Streamlit Cloud entry point**: `dashboard.py`
+- **Authentication**: `st.secrets["auth"]["password"]`
+- **Secret template**: `.streamlit/secrets.toml.example`
+- **Cloud data source**: latest `results/oportunidades_*.csv`
+- **Local data source**: SQLite (`screener.db`) with CSV enrichment when available
+- **Automation**: GitHub Actions workflows in `.github/workflows/`
+- **Flow**: GitHub Actions runs `screener.py` -> commits `results/` -> Streamlit Cloud reads CSV and fichas
