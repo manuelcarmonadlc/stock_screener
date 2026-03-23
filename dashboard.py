@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from datetime import datetime
@@ -9,7 +10,6 @@ from zoneinfo import ZoneInfo
 import altair as alt
 import pandas as pd
 import streamlit as st
-import yfinance as yf
 
 import config as cfg
 import database
@@ -17,6 +17,7 @@ import database
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 RESULTS_DIR = PROJECT_ROOT / cfg.OUTPUT["results_dir"]
+PRICE_HISTORY_DIR = RESULTS_DIR / "price_history"
 SCREENER_PATH = PROJECT_ROOT / "screener.py"
 DEFAULT_TIMEZONE = "Europe/Madrid"
 
@@ -43,6 +44,18 @@ def run_scan(quick_scan: bool, markets: list[str]) -> subprocess.CompletedProces
         errors="replace",
         check=False,
     )
+
+
+def is_cloud_mode() -> bool:
+    """Detecta si el dashboard corre en modo cloud."""
+    cloud_env = (
+        os.environ.get("STREAMLIT_CLOUD")
+        or os.environ.get("STREAMLIT_RUNTIME_ENV")
+        or os.environ.get("STREAMLIT_SHARING_MODE")
+    )
+    if cloud_env:
+        return True
+    return not os.path.exists(PROJECT_ROOT / "screener.db")
 
 
 def get_secret_text(section: str, key: str, default: str | None = None) -> str | None:
@@ -494,22 +507,83 @@ def load_markdown_file(path_str: str) -> str:
 
 
 @st.cache_data(ttl=3600)
-def load_price_history(ticker: str, period: str) -> pd.DataFrame:
-    """Descarga historico de precios para el grafico."""
+def load_exported_price_history(ticker: str) -> pd.DataFrame:
+    """Carga historico de precios pregenerado por el screener si existe."""
+    path = PRICE_HISTORY_DIR / f"{ticker}.csv"
+    if not path.exists():
+        return pd.DataFrame()
+
+    history = pd.read_csv(path)
+    if history.empty or "Date" not in history.columns or "Close" not in history.columns:
+        return pd.DataFrame()
+
+    history["Date"] = pd.to_datetime(history["Date"], errors="coerce").dt.tz_localize(None)
+    history["Close"] = pd.to_numeric(history["Close"], errors="coerce")
+    if "SMA50" in history.columns:
+        history["SMA50"] = pd.to_numeric(history["SMA50"], errors="coerce")
+    if "SMA200" in history.columns:
+        history["SMA200"] = pd.to_numeric(history["SMA200"], errors="coerce")
+    history = history.dropna(subset=["Date", "Close"])
+    if history.empty:
+        return history
+
+    if "SMA50" not in history.columns:
+        history["SMA50"] = history["Close"].rolling(50).mean()
+    if "SMA200" not in history.columns:
+        history["SMA200"] = history["Close"].rolling(200).mean()
+    return history[["Date", "Close", "SMA50", "SMA200"]]
+
+
+def _filter_history_by_period(history: pd.DataFrame, period: str) -> pd.DataFrame:
+    """Filtra el historico exportado al periodo seleccionado."""
+    if history.empty:
+        return history
+
+    period_days = {
+        "6mo": 183,
+        "1y": 365,
+        "2y": 730,
+        "5y": 1825,
+    }
+    days = period_days.get(period)
+    if not days:
+        return history
+
+    max_date = history["Date"].max()
+    cutoff = max_date - pd.Timedelta(days=days)
+    filtered = history.loc[history["Date"] >= cutoff].copy()
+    return filtered if not filtered.empty else history
+
+
+@st.cache_data(ttl=3600)
+def load_price_history(ticker: str, period: str) -> tuple[pd.DataFrame, str]:
+    """Resuelve el historico del grafico sin usar yfinance en cloud."""
+    exported_history = load_exported_price_history(ticker)
+    if not exported_history.empty:
+        return _filter_history_by_period(exported_history, period), "exported"
+
+    if is_cloud_mode():
+        return pd.DataFrame(), "cloud_unavailable"
+
+    try:
+        import yfinance as yf
+    except Exception:
+        return pd.DataFrame(), "local_unavailable"
+
     history = yf.Ticker(ticker).history(period=period)
     if history is None or history.empty:
-        return pd.DataFrame()
+        return pd.DataFrame(), "local_unavailable"
 
     history = history.reset_index()
     history["Date"] = pd.to_datetime(history["Date"]).dt.tz_localize(None)
     history["Close"] = pd.to_numeric(history["Close"], errors="coerce")
     history = history.dropna(subset=["Close"])
     if history.empty:
-        return history
+        return history, "local_unavailable"
 
     history["SMA50"] = history["Close"].rolling(50).mean()
     history["SMA200"] = history["Close"].rolling(200).mean()
-    return history[["Date", "Close", "SMA50", "SMA200"]]
+    return history[["Date", "Close", "SMA50", "SMA200"]], "yfinance_local"
 
 
 def build_signal_markers(price_history: pd.DataFrame, signals: list[str]) -> pd.DataFrame:
@@ -961,14 +1035,21 @@ def main() -> None:
     selected_ticker = str(selected_row.get("Ticker", "")).strip()
 
     period = st.selectbox("Periodo del grafico", ["6mo", "1y", "2y", "5y"], index=1)
-    price_history = load_price_history(selected_ticker, period)
+    price_history, price_history_source = load_price_history(selected_ticker, period)
 
     detail_left, detail_right = st.columns([2, 1])
     with detail_left:
         st.subheader(f"{selected_ticker} | {selected_row.get('Nombre', '')}")
         if price_history.empty:
-            st.warning("No se pudo descargar historico para el grafico.")
+            if price_history_source == "cloud_unavailable":
+                st.info("Grafico de precios no disponible en modo cloud.")
+            else:
+                st.warning("No se pudo cargar historico para el grafico.")
         else:
+            if price_history_source == "exported":
+                st.caption("Grafico construido con historico exportado por el screener.")
+            elif price_history_source == "yfinance_local":
+                st.caption("Grafico construido con yfinance en modo local.")
             st.altair_chart(build_price_chart(price_history, selected_row), use_container_width=True)
 
     with detail_right:

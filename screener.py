@@ -3357,6 +3357,7 @@ def _build_ticker_result(ticker: str, data: dict) -> dict:
         "currency": info.get("currency", "N/A"),
         "price": info.get("regularMarketPrice") or info.get("currentPrice")
                  or info.get("previousClose"),
+        "price_history": data.get("history", {}),
         "rules_version": versioning.get("rules_version"),
         "model_version": versioning.get("model_version"),
         "config_version": versioning.get("config_version"),
@@ -3894,6 +3895,77 @@ def _export_company_reports(passed: list, results_dir: Path, timestamp: str) -> 
     console.print(f"  ðŸ“ Resumen fichas: [bold]{summary_path}[/bold]")
 
 
+def _build_price_history_dataframe(history_payload: dict) -> pd.DataFrame:
+    """Convierte el historico serializado del ticker en un DataFrame exportable."""
+    if not isinstance(history_payload, dict):
+        return pd.DataFrame()
+
+    dates = history_payload.get("dates", [])
+    closes = history_payload.get("close", [])
+    opens = history_payload.get("open", [])
+    highs = history_payload.get("high", [])
+    lows = history_payload.get("low", [])
+    volumes = history_payload.get("volume", [])
+
+    if not dates or not closes or len(dates) != len(closes):
+        return pd.DataFrame()
+
+    row_count = len(dates)
+
+    def _normalize_series(values: list) -> list:
+        if not isinstance(values, list) or len(values) != row_count:
+            return [None] * row_count
+        return values
+
+    df = pd.DataFrame(
+        {
+            "Date": pd.to_datetime(dates, errors="coerce"),
+            "Open": pd.to_numeric(_normalize_series(opens), errors="coerce"),
+            "High": pd.to_numeric(_normalize_series(highs), errors="coerce"),
+            "Low": pd.to_numeric(_normalize_series(lows), errors="coerce"),
+            "Close": pd.to_numeric(closes, errors="coerce"),
+            "Volume": pd.to_numeric(_normalize_series(volumes), errors="coerce"),
+        }
+    )
+    df = df.dropna(subset=["Date", "Close"]).sort_values("Date")
+    if df.empty:
+        return df
+
+    df["SMA50"] = df["Close"].rolling(50).mean()
+    df["SMA200"] = df["Close"].rolling(200).mean()
+    return df
+
+
+def _export_price_history_files(passed: list, results_dir: Path) -> None:
+    """Exporta historicos diarios por ticker para uso del dashboard cloud."""
+    if not passed:
+        return
+
+    history_dir = results_dir / "price_history"
+    history_dir.mkdir(exist_ok=True)
+    exported_count = 0
+
+    for result in passed:
+        ticker = result.get("ticker")
+        if not ticker:
+            continue
+
+        history_payload = result.get("price_history", {})
+        history_df = _build_price_history_dataframe(history_payload)
+        if history_df.empty:
+            continue
+
+        path = history_dir / f"{ticker}.csv"
+        history_df.to_csv(path, index=False)
+        exported_count += 1
+
+    if exported_count:
+        console.print(
+            f"  Historicos precio: [bold]{history_dir}[/bold] "
+            f"({exported_count} tickers)"
+        )
+
+
 def _export_results(passed: list, all_results: list, failed: list):
     """Exporta resultados a Excel y/o CSV."""
 
@@ -4018,6 +4090,7 @@ def _export_results(passed: list, all_results: list, failed: list):
         console.print(f"  📁 CSV: [bold]{csv_path}[/bold]")
 
     # Exportar también análisis completo
+    _export_price_history_files(passed, results_dir)
     _export_company_reports(passed, results_dir, timestamp)
 
     all_rows = []
