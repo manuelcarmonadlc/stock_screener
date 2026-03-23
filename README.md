@@ -119,3 +119,14 @@ Genera automáticamente en la carpeta `results/`:
 ---
 
 **Disclaimer**: Esta herramienta es solo para fines educativos e informativos. No constituye asesoramiento financiero. Toda decisión de inversión es responsabilidad del usuario.
+
+---
+
+## Despliegue en Streamlit Community Cloud
+
+Configuracion recomendada para despliegue:
+- Repositorio: `manuelcarmonadlc/stock_screener`
+- Rama: `main`
+- Entry point: `dashboard.py`
+
+Hay una guia detallada en `documentation/STREAMLIT_CLOUD_DEPLOY.md`.
