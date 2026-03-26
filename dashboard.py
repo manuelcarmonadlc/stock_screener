@@ -1050,6 +1050,38 @@ def main() -> None:
         "GitHub Actions ejecuta el screener, commitea resultados en results/ "
         "y este dashboard consume el ultimo lote disponible."
     )
+    with st.expander("ℹ️ Cómo funciona este dashboard", expanded=False):
+        st.markdown(
+            """
+**Stock Opportunity Screener** es una herramienta automatizada que analiza cientos de empresas
+de múltiples mercados internacionales para detectar oportunidades de inversión a medio plazo,
+siguiendo una metodología de valor basada en la estrategia de Gregorio Hernández.
+
+**Pipeline de análisis (5 capas):**
+1. **Capa 1 — Cuantitativa:** Filtra por métricas fundamentales (PER, EV/EBITDA, dividendo, deuda, márgenes, liquidez, drawdown).
+2. **Capa 2 — Heurística causal:** Evalúa si la caída del precio tiene causa justificada o es oportunidad.
+3. **Capa 3 — Señales de recuperación:** Detecta señales técnicas tempranas de reversión (volumen, soportes, divergencias).
+4. **Capa 4 — Análisis técnico:** MACD semanal, estocástico, MA40, doble suelo, ruptura de directriz.
+5. **Capa 5 — Plan operativo:** Genera zonas de entrada/salida, invalidaciones y horizonte temporal.
+
+**Clasificación final:** Cada empresa recibe una de estas categorías:
+- 🟢 `entrada_directa` — Cumple todos los criterios, se puede operar.
+- 🔵 `entrada_escalada` — Buena oportunidad pero con riesgo, entrada gradual.
+- 🟡 `pendiente_confirmacion` — Prometedora pero falta confirmación técnica.
+- 🟠 `seguimiento` — Interesante pero aún no cumple criterios de entrada.
+- 🔴 `descarte` — No cumple criterios mínimos o tiene hard rules activadas.
+
+**Hard rules:** Reglas que anulan automáticamente la clasificación (ej: deuda excesiva, fraude, sector excluido).
+
+**Datos:** El screener se ejecuta automáticamente vía GitHub Actions (scan diario + scan semanal completo).
+Los resultados se publican en este repositorio y el dashboard los consume directamente.
+
+**Mercados cubiertos:** EUROSTOXX, S&P 500, ASX (Australia), Asia, Italia Mid-Cap, Polonia.
+
+**Metodología:** Basada en la estrategia de inversión a medio plazo de Gregorio Hernández.
+No es asesoramiento financiero. Es una herramienta de screening y análisis.
+            """
+        )
 
     dataframe, source_mode, latest_csv_str = load_dashboard_dataset()
     latest_result_file = Path(latest_csv_str) if latest_csv_str else None
