@@ -1,0 +1,9 @@
+cache/
+results/
+__pycache__/
+*.pyc
+screener.db
+.venv/
+*.egg-info/
+.env
+.streamlit/secrets.toml
