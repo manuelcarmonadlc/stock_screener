@@ -1,0 +1,27 @@
+Ticker,Alert_Type,Severity,Title,Message,Triggered_At,Is_Read
+ABT,new_opportunity,media,Nueva oportunidad detectada en ABT,ABT aparece por primera vez con score 60.1 y clasificación descarte.,2026-08-08T06:49:06.321904+02:00,False
+T,new_opportunity,media,Nueva oportunidad detectada en T,T aparece por primera vez con score 73.8 y clasificación seguimiento.,2026-08-08T06:49:07.273875+02:00,False
+ED,new_opportunity,media,Nueva oportunidad detectada en ED,ED aparece por primera vez con score 64.5 y clasificación entrada_directa.,2026-08-08T06:49:15.580259+02:00,False
+IBM,new_opportunity,media,Nueva oportunidad detectada en IBM,IBM aparece por primera vez con score 64.3 y clasificación entrada_escalada.,2026-08-08T06:49:30.501691+02:00,False
+DUK,new_opportunity,media,Nueva oportunidad detectada en DUK,DUK aparece por primera vez con score 62.6 y clasificación descarte.,2026-08-08T06:49:41.240519+02:00,False
+FMG.AX,new_opportunity,media,Nueva oportunidad detectada en FMG.AX,FMG.AX aparece por primera vez con score 83.8 y clasificación seguimiento.,2026-08-08T06:50:07.777659+02:00,False
+ORG.AX,new_opportunity,media,Nueva oportunidad detectada en ORG.AX,ORG.AX aparece por primera vez con score 63.6 y clasificación seguimiento.,2026-08-08T06:50:13.018439+02:00,False
+MGR.AX,new_opportunity,media,Nueva oportunidad detectada en MGR.AX,MGR.AX aparece por primera vez con score 68.5 y clasificación seguimiento.,2026-08-08T06:50:15.317813+02:00,False
+TWE.AX,new_opportunity,media,Nueva oportunidad detectada en TWE.AX,TWE.AX aparece por primera vez con score 67.2 y clasificación seguimiento.,2026-08-08T06:50:17.390307+02:00,False
+7203.T,new_opportunity,media,Nueva oportunidad detectada en 7203.T,7203.T aparece por primera vez con score 74.8 y clasificación seguimiento.,2026-08-08T06:50:19.140249+02:00,False
+4568.T,new_opportunity,media,Nueva oportunidad detectada en 4568.T,4568.T aparece por primera vez con score 77.8 y clasificación seguimiento.,2026-08-08T06:50:24.590075+02:00,False
+4503.T,new_opportunity,media,Nueva oportunidad detectada en 4503.T,4503.T aparece por primera vez con score 65.7 y clasificación seguimiento.,2026-08-08T06:50:24.922116+02:00,False
+6758.T,new_opportunity,media,Nueva oportunidad detectada en 6758.T,6758.T aparece por primera vez con score 66.8 y clasificación seguimiento.,2026-08-08T06:50:25.903606+02:00,False
+8031.T,new_opportunity,media,Nueva oportunidad detectada en 8031.T,8031.T aparece por primera vez con score 65.8 y clasificación seguimiento.,2026-08-08T06:50:27.586890+02:00,False
+9021.T,new_opportunity,media,Nueva oportunidad detectada en 9021.T,9021.T aparece por primera vez con score 76.7 y clasificación seguimiento.,2026-08-08T06:50:30.002911+02:00,False
+9020.T,new_opportunity,media,Nueva oportunidad detectada en 9020.T,9020.T aparece por primera vez con score 71.8 y clasificación seguimiento.,2026-08-08T06:50:30.176458+02:00,False
+9022.T,new_opportunity,media,Nueva oportunidad detectada en 9022.T,9022.T aparece por primera vez con score 73.6 y clasificación seguimiento.,2026-08-08T06:50:31.434913+02:00,False
+3382.T,new_opportunity,media,Nueva oportunidad detectada en 3382.T,3382.T aparece por primera vez con score 64.3 y clasificación seguimiento.,2026-08-08T06:50:32.360713+02:00,False
+8002.T,new_opportunity,media,Nueva oportunidad detectada en 8002.T,8002.T aparece por primera vez con score 63.3 y clasificación seguimiento.,2026-08-08T06:50:34.195018+02:00,False
+0016.HK,new_opportunity,media,Nueva oportunidad detectada en 0016.HK,0016.HK aparece por primera vez con score 67.8 y clasificación seguimiento.,2026-08-08T06:50:34.931985+02:00,False
+0066.HK,new_opportunity,media,Nueva oportunidad detectada en 0066.HK,0066.HK aparece por primera vez con score 63.6 y clasificación seguimiento.,2026-08-08T06:50:38.506557+02:00,False
+0700.HK,new_opportunity,media,Nueva oportunidad detectada en 0700.HK,0700.HK aparece por primera vez con score 75.0 y clasificación seguimiento.,2026-08-08T06:50:40.582657+02:00,False
+1299.HK,new_opportunity,media,Nueva oportunidad detectada en 1299.HK,1299.HK aparece por primera vez con score 71.0 y clasificación seguimiento.,2026-08-08T06:50:41.813927+02:00,False
+005930.KS,new_opportunity,media,Nueva oportunidad detectada en 005930.KS,005930.KS aparece por primera vez con score 63.8 y clasificación entrada_escalada.,2026-08-08T06:50:43.273735+02:00,False
+035420.KS,new_opportunity,media,Nueva oportunidad detectada en 035420.KS,035420.KS aparece por primera vez con score 75.3 y clasificación seguimiento.,2026-08-08T06:50:44.276239+02:00,False
+005380.KS,new_opportunity,media,Nueva oportunidad detectada en 005380.KS,005380.KS aparece por primera vez con score 63.6 y clasificación seguimiento.,2026-08-08T06:50:46.241930+02:00,False
