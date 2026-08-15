@@ -1,0 +1,81 @@
+---
+## ABI.BR - AB INBEV
+**Clasificacion: pendiente_confirmacion** | Score: 52.6/100
+**Sector:** Consumer Defensive | **Pais:** Belgium | **Precio:** 68.62 EUR
+
+### Diagnostico cuantitativo
+- Score Capa 1: 58.2 / 100
+- Estado Capa 1: pass
+- Fundamental | Dividend yield actual: 1.68%
+- Fundamental | Anos con dividendo en ultimos 10: 11
+- Fundamental | Recorte reciente: No
+- Fundamental | Pico historico de dividendo estimado: 14.57
+- Fundamental | Anos consecutivos antes del corte: 20
+- Fundamental | Payout actual: 28.90%
+- Fundamental | Deuda / Equity: 0.72
+- Fundamental | ROE: 11.40%
+- Fundamental | Capitalizacion: 135.143 M
+- Fundamental | Volumen medio diario: 1.933.771
+- Fundamental | Avg daily volume 20d: 1585457
+- Fundamental | Total debt: 72732000256
+- Fundamental | Total cash: 8010999808
+- Fundamental | Ebitda: 19736000512
+- Fundamental | Deuda neta: 64.721.000.448
+- Fundamental | Deuda neta / EBITDA: 3.28
+- Fundamental | Variacion deuda trimestral: -0.40%
+- Fundamental | Tipo de margen: bruto
+- Fundamental | Margen actual: 56.50%
+- Fundamental | Margen medio ultimos 4T: 56.50%
+- Fundamental | Variacion margen: 0.00 pp
+- Fundamental | Ajuste de score: 5
+- Flags fundamentales: ✓ Historial 11 años de dividendo |   ↳ 20 años consecutivos antes del corte | ✓ Aún paga dividendo (1.7%) → bonus | ✓ Payout 29% | ✓ D/E bajo 0.7 — buena posición | ✓ ROE 11.4% | âœ“ Liquidez media diaria 1933771 | âœ“ Net Debt/EBITDA aceptable (3.28) | âœ“ Deuda estable (-0.4% t/t) | âœ“ Margen bruto estable (0.0 pp)
+- Valoracion | PER: 17
+- Valoracion | Historical avg pe: 17
+- Valoracion | Historical pe years: 5
+- Valoracion | Historical eps source: earnings_dates
+- Valoracion | Per discount method: historical_5y
+- Valoracion | Per discount pct: -0.30%
+- Valoracion | Dividend yield actual: 1.65%
+- Valoracion | Historical avg div yield pct: 1.43%
+- Valoracion | Historical div yield years: 5
+- Valoracion | Div yield premium method: historical_5y
+- Valoracion | Div yield premium pct: 15.50%
+- Valoracion | Maximo 52 semanas: 76.18
+- Valoracion | Caida desde maximo 52s: nan%
+- Valoracion | Caida desde maximo multianual: nan%
+- Valoracion | Price to Book: 1.67
+- Valoracion | EV / EBITDA: 10.52
+- Valoracion | Enterprise value: 199863678976
+- Valoracion | Distancia a SMA200: nan%
+- Valoracion | Ajuste de score: 0
+- Flags valoracion: [OK] PER 17.0 vs media 5a 17.0 (-0% vs media) | [~] Yield 1.65% sobre media 5a (+15%) | [X] Caida excesiva (nan%) - posible trampa | [OK] P/B 1.67 | [X] Precio lejos de SMA200 (+nan%) | [OK] EV/EBITDA aceptable (10.5) | [X] Caida multianual excesiva (nan%)
+
+### Senales de recuperacion
+- Estado recuperacion: confirmada
+- Score recuperacion: 12
+- margin stabilization (media): Margen gross 57.5% vs 56.6% (+0.9 pp)
+- eps stabilization (media): EPS 1.30 vs 0.99 (Diluted EPS)
+- debt reduction (alta): Deuda 72732.0M vs 73027.0M
+- dividend maintained (baja): Dividendo actual 1.68%
+
+### Lectura tecnica
+- Estado tecnico: incompleto
+- Score tecnico: 36 / 100
+- 🟡 MACD convergiendo
+
+### Plan operativo
+- Zona entrada: N/D
+- Zona salida: 64.75
+- Horizonte: 12-18 meses
+- Invalidacion: ROE negativo durante 2 trimestres consecutivos | Ampliación de capital dilutiva | Recorte de rating a bono basura
+
+### Tesis resumida
+AB INBEV está un N/D por debajo de su máximo 52s. Fundamentalmente aceptable con ROE 11.4%, deuda neta/EBITDA 3.3x. Técnicamente 🟡 MACD convergiendo. Clasificación: pendiente_confirmacion.
+
+### Riesgos
+- Capa 1: ✓ D/E bajo 0.7 — buena posición
+- Capa 1: [X] Caida excesiva (nan%) - posible trampa
+- Capa 1: [X] Precio lejos de SMA200 (+nan%)
+- Capa 1: [X] Caida multianual excesiva (nan%)
+- Capa 4: ✗ Lejos de SMA200 (+nan%)
+---
