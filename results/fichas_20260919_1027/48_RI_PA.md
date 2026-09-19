@@ -1,0 +1,84 @@
+---
+## RI.PA - PERNOD RICARD
+**Clasificacion: entrada_escalada** | Score: 60.9/100
+**Sector:** Consumer Defensive | **Pais:** France | **Precio:** 59.44 EUR
+
+### Diagnostico cuantitativo
+- Score Capa 1: 62.5 / 100
+- Estado Capa 1: pass
+- Fundamental | Dividend yield actual: 7.91%
+- Fundamental | Anos con dividendo en ultimos 10: 11
+- Fundamental | Recorte reciente: No
+- Fundamental | Pico historico de dividendo estimado: 4.7
+- Fundamental | Anos consecutivos antes del corte: 20
+- Fundamental | Payout actual: 98.60%
+- Fundamental | Deuda / Equity: 0.77
+- Fundamental | ROE: 7.60%
+- Fundamental | Capitalizacion: 14.968 M
+- Fundamental | Volumen medio diario: 685.429
+- Fundamental | Avg daily volume 20d: 760562
+- Fundamental | Total debt: 12677999616
+- Fundamental | Total cash: 1992999936
+- Fundamental | Ebitda: 2736000000
+- Fundamental | Deuda neta: 10.684.999.680
+- Fundamental | Deuda neta / EBITDA: 3.91
+- Fundamental | Variacion deuda trimestral: -6.80%
+- Fundamental | Tipo de margen: N/D
+- Fundamental | Margen actual: 58.40%
+- Fundamental | Margen medio ultimos 4T: N/D
+- Fundamental | Variacion margen: N/D
+- Fundamental | Ajuste de score: 4
+- Flags fundamentales: ✓ Historial 11 años de dividendo |   ↳ 20 años consecutivos antes del corte | ✓ Aún paga dividendo (7.9%) → bonus | ⚠ Payout alto (99%) — vigilar | ✓ D/E bajo 0.8 — buena posición | ~ ROE deprimido (7.6%) — ¿temporal? | âœ“ Liquidez media diaria 685429 | âœ“ Net Debt/EBITDA aceptable (3.91) | âœ“ Deuda estable (-6.8% t/t) | ~ VariaciÃ³n de mÃ¡rgenes N/D
+- Valoracion | PER: 12.5
+- Valoracion | Historical avg pe: 18.2
+- Valoracion | Historical pe years: 4
+- Valoracion | Historical eps source: financials
+- Valoracion | Per discount method: historical_5y
+- Valoracion | Per discount pct: 31.40%
+- Valoracion | Dividend yield actual: 7.82%
+- Valoracion | Historical avg div yield pct: 3.45%
+- Valoracion | Historical div yield years: 5
+- Valoracion | Div yield premium method: historical_5y
+- Valoracion | Div yield premium pct: 126.40%
+- Valoracion | Maximo 52 semanas: 90.54
+- Valoracion | Caida desde maximo 52s: nan%
+- Valoracion | Caida desde maximo multianual: nan%
+- Valoracion | Price to Book: 0.97
+- Valoracion | EV / EBITDA: 9.76
+- Valoracion | Enterprise value: 25652797440
+- Valoracion | Distancia a SMA200: nan%
+- Valoracion | Ajuste de score: 0
+- Flags valoracion: [OK] PER 12.5 vs media 5a 18.2 (31% vs media) | [OK] Yield 7.82% vs media 5a 3.45% (+126%) | [X] Caida excesiva (nan%) - posible trampa | [OK] P/B 0.97 | [X] Precio lejos de SMA200 (+nan%) | [OK] EV/EBITDA aceptable (9.8) | [X] Caida multianual excesiva (nan%)
+
+### Senales de recuperacion
+- Estado recuperacion: confirmada
+- Score recuperacion: 12
+- eps stabilization (media): EPS 6.45 vs 5.83 (annual_eps_fallback)
+- debt reduction (alta): Deuda 12678.0M vs 13602.0M
+- dividend maintained (baja): Dividendo actual 7.91%
+- analyst upgrade (media): Target 81.76 vs precio 59.44 (+38%), recMean 2.50, recKey buy
+
+### Lectura tecnica
+- Estado tecnico: razonable
+- Score tecnico: 56 / 100
+- 🔵 RSI recuperándose de sobreventa
+- 🟡 MACD convergiendo
+- 🟢 base_pattern_detected
+
+### Plan operativo
+- Zona entrada: N/D
+- Zona salida: 76.96
+- Horizonte: 12-18 meses
+- Invalidacion: ROE negativo durante 2 trimestres consecutivos | Ampliación de capital dilutiva | Recorte de rating a bono basura
+
+### Tesis resumida
+PERNOD RICARD está un N/D por debajo de su máximo 52s. Fundamentalmente sólida con ROE 7.6%, deuda neta/EBITDA 3.9x. Técnicamente 🔵 RSI recuperándose de sobreventa, 🟡 MACD convergiendo. Clasificación: entrada_escalada.
+
+### Riesgos
+- Capa 1: ⚠ Payout alto (99%) — vigilar
+- Capa 1: ✓ D/E bajo 0.8 — buena posición
+- Capa 1: [X] Caida excesiva (nan%) - posible trampa
+- Capa 1: [X] Precio lejos de SMA200 (+nan%)
+- Capa 1: [X] Caida multianual excesiva (nan%)
+- Capa 4: ✗ Lejos de SMA200 (+nan%)
+---
