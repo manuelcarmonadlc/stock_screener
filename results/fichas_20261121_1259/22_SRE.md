@@ -1,0 +1,87 @@
+---
+## SRE - DBA Sempra
+**Clasificacion: seguimiento** | Score: 71.2/100
+**Sector:** Utilities | **Pais:** United States | **Precio:** 76.16 USD
+
+### Diagnostico cuantitativo
+- Score Capa 1: 72.5 / 100
+- Estado Capa 1: pass
+- Fundamental | Dividend yield actual: 3.45%
+- Fundamental | Anos con dividendo en ultimos 10: 11
+- Fundamental | Recorte reciente: No
+- Fundamental | Pico historico de dividendo estimado: 2.58
+- Fundamental | Anos consecutivos antes del corte: 20
+- Fundamental | Payout actual: 56.00%
+- Fundamental | Deuda / Equity: 0.85
+- Fundamental | ROE: 8.70%
+- Fundamental | Capitalizacion: 49.818 M
+- Fundamental | Volumen medio diario: 3.977.901
+- Fundamental | Avg daily volume 20d: 4748255
+- Fundamental | Total debt: 37474000896
+- Fundamental | Total cash: 34000000
+- Fundamental | Ebitda: 6058999808
+- Fundamental | Deuda neta: 37.440.000.896
+- Fundamental | Deuda neta / EBITDA: 6.18
+- Fundamental | Variacion deuda trimestral: 2.20%
+- Fundamental | Tipo de margen: bruto
+- Fundamental | Margen actual: 44.80%
+- Fundamental | Margen medio ultimos 4T: 50.80%
+- Fundamental | Variacion margen: -6.00 pp
+- Fundamental | Ajuste de score: -11
+- Flags fundamentales: ✓ Historial 11 años de dividendo |   ↳ 20 años consecutivos antes del corte | ✓ Aún paga dividendo (3.5%) → bonus | ✓ Payout 56% | ✓ D/E bajo 0.8 — buena posición | ✓ ROE 8.7% | âœ“ Liquidez media diaria 3977901 | âš  Net Debt/EBITDA algo alto (6.18) | ~ Deuda +2.2% trimestral | âš  CaÃ­da de margen bruto (-6.0 pp)
+- Valoracion | PER: 16.3
+- Valoracion | Historical avg pe: 16.8
+- Valoracion | Historical pe years: 5
+- Valoracion | Historical eps source: earnings_dates
+- Valoracion | Per discount method: historical_5y
+- Valoracion | Per discount pct: 2.90%
+- Valoracion | Dividend yield actual: 3.45%
+- Valoracion | Historical avg div yield pct: 3.52%
+- Valoracion | Historical div yield years: 5
+- Valoracion | Div yield premium method: historical_5y
+- Valoracion | Div yield premium pct: -1.90%
+- Valoracion | Maximo 52 semanas: 101.04
+- Valoracion | Caida desde maximo 52s: 24.60%
+- Valoracion | Caida desde maximo multianual: 23.40%
+- Valoracion | Price to Book: 1.49
+- Valoracion | EV / EBITDA: 16.19
+- Valoracion | Enterprise value: 87257752448
+- Valoracion | Distancia a SMA200: -13.30%
+- Valoracion | Ajuste de score: -2
+- Flags valoracion: [OK] PER 16.3 vs media 5a 16.8 (3% vs media) | [~] Yield 3.45% ligeramente por debajo de media 5a (-2%) | [OK] Caida 24.6% desde max 52s | [OK] P/B 1.49 | [OK] Precio 13.3% bajo SMA200 | [X] EV/EBITDA exigente (16.2) | [OK] Caida 23.4% desde max multianual
+
+### Senales de recuperacion
+- Estado recuperacion: parcial
+- Score recuperacion: 7
+- eps stabilization (media): EPS 1.34 vs 1.21 (Diluted EPS)
+- dividend maintained (baja): Dividendo actual 3.45% con caída del 24.6%
+- analyst upgrade (media): Target 96.81 vs precio 76.16 (+27%), recMean 1.52, recKey buy
+
+### Lectura tecnica
+- Estado tecnico: razonable
+- Score tecnico: 67 / 100
+- 🔵 RSI en sobreventa
+- 🟡 MACD convergiendo
+- 🟢 base_pattern_detected
+
+### Plan operativo
+- Zona entrada: 72.35 - 76.16
+- Zona salida: 85.88 - 87.87
+- Horizonte: 6-12 meses
+- Invalidacion: Pérdida del soporte en 72.35 | ROE negativo durante 2 trimestres consecutivos | Ampliación de capital dilutiva | Recorte de rating a bono basura
+
+### Tesis resumida
+DBA Sempra está un 24.6% por debajo de su máximo 52s. Fundamentalmente sólida con ROE 8.7%, deuda neta/EBITDA 6.2x. Técnicamente 🔵 RSI en sobreventa, 🟡 MACD convergiendo. Clasificación: seguimiento.
+
+### Riesgos
+- Capa 1: ✓ D/E bajo 0.8 — buena posición
+- Capa 1: âš  Net Debt/EBITDA algo alto (6.18)
+- Capa 1: ~ Deuda +2.2% trimestral
+- Capa 1: [~] Yield 3.45% ligeramente por debajo de media 5a (-2%)
+- Capa 1: [OK] Caida 24.6% desde max 52s
+- Capa 1: [OK] Precio 13.3% bajo SMA200
+- Capa 1: [OK] Caida 23.4% desde max multianual
+- Capa 4: ✓ Bajo SMA200 (-13.3%)
+- Capa 4: ✗ Volumen bajo (x0.9)
+- Capa 3: Recuperacion solo parcial
+---
